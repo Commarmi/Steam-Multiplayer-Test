@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dssf4858mdy36"]
+
+[ext_resource type="Script" uid="uid://06ksi8mvtocq" path="res://Game/Maps/Mapa.gd" id="1_851r2"]
+[ext_resource type="PackedScene" uid="uid://crblgw2ogmgwc" path="res://Game/GameObstacles/StaticWall.tscn" id="2_oiuak"]
+[ext_resource type="Script" uid="uid://dlajudxey5rev" path="res://Game/Maps/PuntosSpawn/PuntoSpawnTimer.gd" id="3_2b5ua"]
+[ext_resource type="PackedScene" uid="uid://blq7k8yaq87xn" path="res://Game/GameObstacles/PhysicsObstacle.tscn" id="4_hxd7p"]
+
+[node name="MapaTest1" type="Node2D" unique_id=435165712]
+script = ExtResource("1_851r2")
+metadata/_custom_type_script = "uid://06ksi8mvtocq"
+
+[node name="StaticWall" parent="." unique_id=1444293005 instance=ExtResource("2_oiuak")]
+position = Vector2(570, -73)
+scale = Vector2(9.400004, 1)
+
+[node name="StaticWall2" parent="." unique_id=247818660 instance=ExtResource("2_oiuak")]
+position = Vector2(573, 749)
+scale = Vector2(9.400004, 1)
+
+[node name="StaticWall3" parent="." unique_id=1625913959 instance=ExtResource("2_oiuak")]
+position = Vector2(-86, 340.99997)
+rotation = 1.5707964
+scale = Vector2(5.9742923, 0.99573046)
+
+[node name="StaticWall4" parent="." unique_id=391064612 instance=ExtResource("2_oiuak")]
+position = Vector2(1230, 328.00003)
+rotation = 1.5707964
+scale = Vector2(5.9742923, 0.99573046)
+
+[node name="PuntoSpawnTimer" type="Node2D" parent="." unique_id=473134014]
+position = Vector2(203, 185)
+script = ExtResource("3_2b5ua")
+SpawnDelay = 100.0
+metadata/_custom_type_script = "uid://dlajudxey5rev"
+
+[node name="PuntoSpawnTimer2" type="Node2D" parent="." unique_id=1158160519]
+position = Vector2(910, 438)
+script = ExtResource("3_2b5ua")
+SpawnDelay = 100.0
+metadata/_custom_type_script = "uid://dlajudxey5rev"
+
+[node name="PhysicsObstacle" parent="." unique_id=1500302952 instance=ExtResource("4_hxd7p")]
+position = Vector2(612, 70)
+
+[node name="PhysicsObstacle2" parent="." unique_id=510484891 instance=ExtResource("4_hxd7p")]
+position = Vector2(444, 89.99999)
+rotation = 1.0268216
+
+[node name="PhysicsObstacle3" parent="." unique_id=660098079 instance=ExtResource("4_hxd7p")]
+position = Vector2(545.99994, 218.99997)
+rotation = -0.13662863

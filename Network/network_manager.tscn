@@ -2,13 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bshtu8paxiqv7" path="res://Network/network_manager.gd" id="1_pcknu"]
 [ext_resource type="PackedScene" uid="uid://c2d24f8uyf0kb" path="res://Player/player_.tscn" id="2_cd83h"]
+[ext_resource type="Script" uid="uid://t01px3s2mfws" path="res://Game/game.gd" id="3_x8cyb"]
+[ext_resource type="PackedScene" uid="uid://dssf4858mdy36" path="res://Game/Maps/MapaTest1.tscn" id="4_vh7r3"]
 
 [node name="NetworkManager" type="Node" unique_id=1223715632]
 script = ExtResource("1_pcknu")
 player_scene = ExtResource("2_cd83h")
 
-[node name="Game" type="Node2D" parent="." unique_id=500639869]
-position = Vector2(616, 298)
+[node name="Game" type="Node2D" parent="." unique_id=1457746832 node_paths=PackedStringArray("Map")]
+script = ExtResource("3_x8cyb")
+Map = NodePath("MapaTest2")
+metadata/_custom_type_script = "uid://t01px3s2mfws"
+
+[node name="MapaTest2" parent="Game" unique_id=435165712 instance=ExtResource("4_vh7r3")]
 
 [node name="Control" type="Control" parent="." unique_id=1339811507]
 layout_mode = 3
@@ -51,7 +57,7 @@ text = "Partidas:"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=730155323]
 _spawnable_scenes = PackedStringArray("uid://c2d24f8uyf0kb")
-spawn_path = NodePath("../Game")
+spawn_path = NodePath("../Game/MapaTest2")
 
 [connection signal="pressed" from="Control/HBoxContainer/HostButon" to="." method="host_game"]
 [connection signal="pressed" from="Control/HBoxContainer/JoinButon" to="." method="search_lobbies"]

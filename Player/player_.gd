@@ -2,6 +2,8 @@ class_name OnlinePlayer
 extends CharacterBody2D
 
 @export var speed: float = 300.0
+@export var Vida:float=100
+
 
 func _enter_tree() -> void:
 	# Establecemos la autoridad basándonos en el nombre del nodo.
@@ -27,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# Solo el dueño ejecuta este código y mueve el personaje sin latencia.
-	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction := Input.get_vector("Izquierda", "Derecha", "Arriva", "Abajo")
 	
 	if direction:
 		velocity = direction * speed

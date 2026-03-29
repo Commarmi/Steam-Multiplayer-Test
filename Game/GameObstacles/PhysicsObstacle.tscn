@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://blq7k8yaq87xn"]
+
+[ext_resource type="Texture2D" uid="uid://dwah2mirxqtrk" path="res://icon.svg" id="1_276va"]
+
+[node name="PhysicsObstacle" type="RigidBody2D" unique_id=1500302952]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=390899575]
+modulate = Color(0.105882354, 1, 0.43529412, 1)
+texture = ExtResource("1_276va")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=196659830]
+visible = false
+polygon = PackedVector2Array(-53, -64, -64, -53, -64, 52, -53, 64, 53, 64, 64, 53, 64, -52, 53, -64)
