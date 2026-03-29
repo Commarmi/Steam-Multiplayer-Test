@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c2d24f8uyf0kb"]
+
+[ext_resource type="Script" uid="uid://dshtt6xajncrs" path="res://Player/player_.gd" id="1_4jr1b"]
+[ext_resource type="Texture2D" uid="uid://dwah2mirxqtrk" path="res://icon.svg" id="1_5ildn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jr1b"]
+size = Vector2(128, 128)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_efl3s"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player_" type="CharacterBody2D" unique_id=1624360371]
+script = ExtResource("1_4jr1b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=211638932]
+texture = ExtResource("1_5ildn")
+
+[node name="Label" type="Label" parent="." unique_id=174254577]
+offset_left = -33.0
+offset_top = -92.0
+offset_right = 31.0
+offset_bottom = -69.0
+text = "Nombre"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1097083555]
+visible = false
+shape = SubResource("RectangleShape2D_4jr1b")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=807603608]
+replication_config = SubResource("SceneReplicationConfig_efl3s")

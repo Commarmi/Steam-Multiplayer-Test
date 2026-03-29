@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://chiasar6cm6vt"]
+
+[ext_resource type="Script" uid="uid://bshtu8paxiqv7" path="res://Network/network_manager.gd" id="1_pcknu"]
+[ext_resource type="PackedScene" uid="uid://c2d24f8uyf0kb" path="res://Player/player_.tscn" id="2_cd83h"]
+
+[node name="NetworkManager" type="Node" unique_id=1223715632]
+script = ExtResource("1_pcknu")
+player_scene = ExtResource("2_cd83h")
+
+[node name="Game" type="Node2D" parent="." unique_id=500639869]
+position = Vector2(616, 298)
+
+[node name="Control" type="Control" parent="." unique_id=1339811507]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=384471184]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 94.0
+offset_bottom = 41.0
+
+[node name="HostButon" type="Button" parent="Control/HBoxContainer" unique_id=24047422]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButon" type="Button" parent="Control/HBoxContainer" unique_id=1968174178]
+layout_mode = 2
+text = "Join"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=2099135350]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 53.0
+offset_right = 103.0
+offset_bottom = 377.0
+
+[node name="ListaPartidas" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=652724079]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/ScrollContainer/ListaPartidas" unique_id=1084745503]
+layout_mode = 2
+text = "Partidas:"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=730155323]
+_spawnable_scenes = PackedStringArray("uid://c2d24f8uyf0kb")
+spawn_path = NodePath("../Game")
+
+[connection signal="pressed" from="Control/HBoxContainer/HostButon" to="." method="host_game"]
+[connection signal="pressed" from="Control/HBoxContainer/JoinButon" to="." method="search_lobbies"]
