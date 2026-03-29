@@ -40,47 +40,52 @@ func host_game() -> void:
 
 # Steam nos responde aquí automáticamente:
 func _on_lobby_created(connect_flag: int, lobby_id: int) -> void:
-	if connect_flag == 1: # 1 es éxito
+	if connect_flag == 1:
 		hosted_lobby_id = lobby_id
-		print("Lobby creado en Steam. ID: ", lobby_id)
+		print("Lobby creado. ID: ", lobby_id)
 		
-		# Le ponemos un nombre al lobby para que otros lo vean
+		# 1. ESTABLECER EL NOMBRE DEL HOST COMO NOMBRE DE SALA
 		var host_name: String = Steam.getPersonaName()
-		Steam.setLobbyData(lobby_id, "name", "Sala de " + host_name)
+		Steam.setLobbyData(lobby_id, "name", "Partida de " + host_name)
 		
-		# AHORA SÍ: Encendemos el servidor de red de Godot
-# AHORA SÍ: Encendemos el servidor de red de Godot
+		# 2. LA CLAVE PARA FILTRAR: Un ID único para tu juego (incluso la versión)
+		# Puedes cambiar "mi_juego_secreto_v1" por el nombre que quieras.
+		Steam.setLobbyData(lobby_id, "game_id", "mi_juego_secreto_v1")
+		
+		# (Aquí sigue el código normal para encender el servidor)
 		var error: Error = peer.create_host(0)
 		if error == OK:
 			multiplayer.multiplayer_peer = peer
 			ui_menu.hide()
 			
-			# ESTA LÍNEA ES LA QUE CAMBIAMOS
-			var my_id = multiplayer.get_unique_id() # ¡Para el host, esto siempre devolverá 1!
+			var my_id = multiplayer.get_unique_id()
 			spawn_player(my_id)
 		else:
 			print("Error al iniciar el host de Godot.")
-# Conectado a la señal 'pressed' del BtnSearch
+
 func search_lobbies() -> void:
 	print("Buscando partidas en Steam...")
-	# Limpiamos la lista de la UI por si había botones viejos
 	for child in lobby_list.get_children():
 		child.queue_free()
 		
-	# Buscamos partidas en todo el mundo
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	
+	# EL FILTRO MÁGICO: Le decimos a Steam "Solo devuélveme las salas que tengan 'game_id' igual a 'mi_juego_secreto_v1'"
+	Steam.addRequestLobbyListStringFilter("game_id", "mi_juego_secreto_v1", Steam.LOBBY_COMPARISON_EQUAL)
+	
 	Steam.requestLobbyList()
 
 # Steam nos devuelve la lista aquí:
 func _on_lobby_match_list(lobbies: Array) -> void:
-	print("Partidas encontradas: ", lobbies.size())
+	print("Partidas de mi juego encontradas: ", lobbies.size())
 	
 	for lobby_id in lobbies:
+		# Pedimos el dato "name" que configuró el Host al crear la sala
 		var lobby_name: String = Steam.getLobbyData(lobby_id, "name")
+		
 		if lobby_name == "":
 			lobby_name = "Partida sin nombre"
 			
-		# Creamos un botón para cada partida
 		var btn := Button.new()
 		btn.text = lobby_name
 		btn.pressed.connect(join_lobby.bind(lobby_id))

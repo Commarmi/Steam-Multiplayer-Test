@@ -37,7 +37,7 @@ text = "Join"
 layout_mode = 0
 offset_left = 10.0
 offset_top = 53.0
-offset_right = 103.0
+offset_right = 263.0
 offset_bottom = 377.0
 
 [node name="ListaPartidas" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=652724079]
