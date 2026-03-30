@@ -35,5 +35,12 @@ func _physics_process(delta: float) -> void:
 		velocity = direction * speed
 	else:
 		velocity = Vector2.ZERO
-
+	if Input.is_action_just_pressed("Ataque"):Ataque.rpc()
+	
 	move_and_slide()
+
+@rpc("any_peer", "call_local", "reliable")
+func Ataque():
+	modulate.r=randf_range(0,1)
+	modulate.b=randf_range(0,1)
+	modulate.g=randf_range(0,1)
