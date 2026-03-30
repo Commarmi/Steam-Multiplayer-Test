@@ -34,6 +34,14 @@ offset_bottom = -69.0
 text = "Nombre"
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="." unique_id=2015014877]
+offset_left = -32.0
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 95.0
+text = "Vida"
+horizontal_alignment = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1097083555]
 visible = false
 shape = SubResource("RectangleShape2D_4jr1b")
