@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dshtt6xajncrs" path="res://Player/player_.gd" id="1_4jr1b"]
 [ext_resource type="Texture2D" uid="uid://dwah2mirxqtrk" path="res://icon.svg" id="1_5ildn"]
+[ext_resource type="Script" uid="uid://cf7yuu8mfugsu" path="res://addons/TweenAnimation/TweenAnimation.gd" id="3_yw7u2"]
+[ext_resource type="Script" uid="uid://cqxuuexdumeed" path="res://addons/TweenAnimation/TweenProperty.gd" id="4_543co"]
+[ext_resource type="Script" uid="uid://dcxdfqoruugi1" path="res://addons/TweenAnimation/TweenInterval.gd" id="5_j4uil"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4jr1b"]
 size = Vector2(128, 128)
@@ -13,6 +16,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:nombre")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+properties/2/path = NodePath(".:Vida")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Player_" type="CharacterBody2D" unique_id=1624360371]
 script = ExtResource("1_4jr1b")
@@ -36,3 +42,49 @@ shape = SubResource("RectangleShape2D_4jr1b")
 replication_config = SubResource("SceneReplicationConfig_efl3s")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=794604054]
+
+[node name="Ataque" type="Area2D" parent="." unique_id=969082081]
+modulate = Color(1, 1, 1, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ataque" unique_id=152075222]
+polygon = PackedVector2Array(72, -8, 72, 8, 168, 8, 176, 0, 168, -8)
+
+[node name="Polygon2D" type="Polygon2D" parent="Ataque" unique_id=1832183192]
+modulate = Color(1, 0.31764707, 0.31764707, 1)
+polygon = PackedVector2Array(72, -8, 72, 8, 168, 8, 176, 0, 168, -8)
+
+[node name="Delay" type="Timer" parent="Ataque" unique_id=940209335]
+wait_time = 0.5
+one_shot = true
+
+[node name="Lifetime" type="Timer" parent="Ataque" unique_id=1201231017]
+wait_time = 0.25
+one_shot = true
+
+[node name="TweenAnimation" type="Node" parent="Ataque" unique_id=42766075]
+script = ExtResource("3_yw7u2")
+metadata/_custom_type_script = "uid://cf7yuu8mfugsu"
+
+[node name="TweenProperty" type="Node" parent="Ataque/TweenAnimation" unique_id=471114529 node_paths=PackedStringArray("node")]
+script = ExtResource("4_543co")
+node = NodePath("../..")
+property = ":modulate"
+final_value = Color(1, 1, 1, 1)
+from_value = Color(1, 1, 1, 0)
+metadata/_custom_type_script = "uid://cqxuuexdumeed"
+
+[node name="TweenInterval" type="Node" parent="Ataque/TweenAnimation" unique_id=1362065194]
+script = ExtResource("5_j4uil")
+time = 0.05
+metadata/_custom_type_script = "uid://dcxdfqoruugi1"
+
+[node name="TweenProperty2" type="Node" parent="Ataque/TweenAnimation" unique_id=1041613410 node_paths=PackedStringArray("node")]
+script = ExtResource("4_543co")
+node = NodePath("../..")
+property = ":modulate"
+final_value = Color(1, 1, 1, 0)
+from_value = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://cqxuuexdumeed"
+
+[connection signal="body_entered" from="Ataque" to="." method="_on_ataque_body_entered"]
+[connection signal="timeout" from="Ataque/Lifetime" to="." method="_on_lifetime_timeout"]

@@ -30,13 +30,13 @@ scale = Vector2(5.9742923, 0.99573046)
 [node name="PuntoSpawnTimer" type="Node2D" parent="." unique_id=473134014]
 position = Vector2(203, 185)
 script = ExtResource("3_2b5ua")
-SpawnDelay = 100.0
+SpawnDelay = 10000.0
 metadata/_custom_type_script = "uid://dlajudxey5rev"
 
 [node name="PuntoSpawnTimer2" type="Node2D" parent="." unique_id=1158160519]
 position = Vector2(910, 438)
 script = ExtResource("3_2b5ua")
-SpawnDelay = 100.0
+SpawnDelay = 10000.0
 metadata/_custom_type_script = "uid://dlajudxey5rev"
 
 [node name="PhysicsObstacle" parent="." unique_id=1500302952 instance=ExtResource("4_hxd7p")]

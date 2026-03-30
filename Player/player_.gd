@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export var speed: float = 300.0
 @export var Vida:float=100
+@export var Daño:float=10
+var Atacando:bool
 
 
 func _enter_tree() -> void:
@@ -41,6 +43,23 @@ func _physics_process(delta: float) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func Ataque():
-	modulate.r=randf_range(0,1)
-	modulate.b=randf_range(0,1)
-	modulate.g=randf_range(0,1)
+	print("Atacando")
+	if $Ataque/Delay.is_stopped():
+		$Ataque.rotation=global_position.angle_to_point(get_global_mouse_position())
+		Atacando=true
+		$Ataque/TweenAnimation.play()
+		$Ataque/Lifetime.start()
+		$Ataque/Delay.start()
+
+
+func _on_lifetime_timeout():
+	Atacando=true
+
+	
+
+func RecibirDaño(D:float):
+	Vida-=D
+
+
+func _on_ataque_body_entered(body):
+	if body is OnlinePlayer and body!=self:RecibirDaño.rpc(Daño)

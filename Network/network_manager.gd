@@ -1,4 +1,4 @@
-class_name NetworkManager
+class_name MYNetworkManager
 extends Node
 
 @export var player_scene: PackedScene
