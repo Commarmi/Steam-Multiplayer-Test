@@ -1,0 +1,454 @@
+[gd_scene format=3 uid="uid://dff3yj03m2dnk"]
+
+[ext_resource type="Script" uid="uid://nlicu3yo8xap" path="res://Lobby/Lobby.gd" id="1_6tm10"]
+[ext_resource type="Script" uid="uid://dlau3toqswkb0" path="res://Lobby/player_container.gd" id="2_iiluk"]
+[ext_resource type="Script" uid="uid://cuy85h70otjem" path="res://Lobby/menu_box.gd" id="3_tw5qk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gwhf"]
+bg_color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.19076231, 0.19076234, 0.19076225, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uid5o"]
+bg_color = Color(0.33660772, 0.33660758, 0.3366076, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4r14"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6255971, 0.6255971, 0.6255971, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 20
+expand_margin_left = 7.0
+expand_margin_top = 7.0
+expand_margin_right = 7.0
+expand_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge1hh"]
+bg_color = Color(1, 1, 1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhmw3"]
+bg_color = Color(0.5330367, 0.5330367, 0.5330366, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.12955856, 0.12955844, 0.12955841, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwhf"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(1, 0, 0, 1)
+grow = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4r14"]
+albedo_color = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+emission_enabled = true
+emission = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+grow = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ge1hh"]
+albedo_color = Color(0, 0.23333359, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.23333359, 1, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(0, 0.23333359, 1, 1)
+grow = true
+
+[sub_resource type="Environment" id="Environment_8gwhf"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+glow_bloom = 0.48
+
+[node name="Lobby" type="PanelContainer" unique_id=403897490]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gwhf")
+script = ExtResource("1_6tm10")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1137291651]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=252603151]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1300686002]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow" unique_id=806953961]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uid5o")
+
+[node name="LobyName" type="Label" parent="MarginContainer/VBoxContainer/TopRow/PanelContainer" unique_id=2069141648]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NombreHost"
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow" unique_id=815087510]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uid5o")
+
+[node name="Ping" type="Label" parent="MarginContainer/VBoxContainer/TopRow/PanelContainer2" unique_id=719261923]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ping"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TopRow" unique_id=1431804825]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitButon" type="Button" parent="MarginContainer/VBoxContainer/TopRow" unique_id=321670758]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="MainRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1431492563]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PlayersContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow" unique_id=523315848]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer" unique_id=800250418]
+custom_minimum_size = Vector2(282.61, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer" unique_id=609316384]
+layout_mode = 2
+theme_override_constants/margin_top = 7
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer" unique_id=294794459]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer" unique_id=1920070879]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=759107567]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=749430888]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "   Players:"
+
+[node name="NPlayers" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1762173644]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "0"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=506213672]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KickAll" type="Button" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=897771017]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Kick All"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=883145181]
+layout_mode = 2
+text = "   "
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1601759230]
+layout_mode = 2
+
+[node name="PlayerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1585050377]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+script = ExtResource("2_iiluk")
+
+[node name="PlayerBackground" type="Panel" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer" unique_id=768731885]
+modulate = Color(0.5489626, 0.5489626, 0.54896253, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4r14")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer" unique_id=1829722741]
+layout_mode = 2
+
+[node name="NombrePlayer" type="Button" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer" unique_id=883045279]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "NombrePlayer"
+
+[node name="Kick" type="Button" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer" unique_id=1292939731]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Kick"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer" unique_id=1187114690]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer" unique_id=803996512]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer/MarginContainer" unique_id=2050591167]
+modulate = Color(0.9870928, 0.6087281, 0.21778065, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ge1hh")
+
+[node name="ReadyL" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer/HBoxContainer/MarginContainer" unique_id=59384338]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " Not Ready "
+horizontal_alignment = 1
+
+[node name="MidleMenu" type="PanelContainer" parent="MarginContainer/VBoxContainer/MainRow" unique_id=1503577399]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhmw3")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu" unique_id=18663619]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer" unique_id=288840996]
+handle_input_locally = false
+size = Vector2i(582, 486)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport" unique_id=1795276245]
+
+[node name="MenuBox" type="CSGCombiner3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D" unique_id=888193345]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.49999997, 0.49999997, -0.70710677, 0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8gwhf")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("3_tw5qk")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox" unique_id=2107916873]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox" unique_id=1494629532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.91625977, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox" unique_id=1208669926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox" unique_id=58855322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.008056641)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.92041016)
+
+[node name="MenuBox2" type="CSGCombiner3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D" unique_id=1915115786]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_g4r14")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("3_tw5qk")
+VelocidadGiro = Vector3(0, 1, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox2" unique_id=1486482378]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox2" unique_id=265206613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.91625977, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox2" unique_id=286080001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox2" unique_id=703447978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.008056641)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.92041016)
+
+[node name="MenuBox3" type="CSGCombiner3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D" unique_id=2143717592]
+transform = Transform3D(-2.6008276e-08, 0.42072853, 0.42072853, 0, 0.42072853, -0.42072853, -0.595, -1.839063e-08, -1.839063e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ge1hh")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("3_tw5qk")
+VelocidadGiro = Vector3(1, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox3" unique_id=1022828420]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox3" unique_id=2015735631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.91625977, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox3" unique_id=867703014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport/Node3D/MenuBox3" unique_id=1514579998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.008056641)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.92041016)
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport" unique_id=1131090460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8604708)
+projection = 1
+size = 2.0339394
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/VBoxContainer/MainRow/MidleMenu/SubViewportContainer/SubViewport" unique_id=1717171980]
+environment = SubResource("Environment_8gwhf")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MainRow" unique_id=931489446]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer" unique_id=856350912]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer" unique_id=1742888928]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer" unique_id=806789334]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1523688381]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=2047905463]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "  Games:"
+
+[node name="HostPick" type="Button" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1168188505]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "HostPick"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1094165330]
+layout_mode = 2
+
+[node name="GameContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=429514988]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="GameBackground" type="Panel" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2" unique_id=560631619]
+modulate = Color(0.5489626, 0.5489626, 0.54896253, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4r14")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2" unique_id=942632503]
+layout_mode = 2
+
+[node name="NombrePlayer" type="Button" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2/HBoxContainer" unique_id=457178182]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+toggle_mode = true
+text = "GameName"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2/HBoxContainer" unique_id=900736813]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2/HBoxContainer" unique_id=357953360]
+custom_minimum_size = Vector2(28.285, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2/HBoxContainer/MarginContainer" unique_id=416874433]
+modulate = Color(0.9870928, 0.6087281, 0.21778065, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ge1hh")
+
+[node name="ReadyL" type="Label" parent="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/GameContainer2/HBoxContainer/MarginContainer" unique_id=1213051946]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 1
+
+[node name="BotomRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=383090062]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/BotomRow" unique_id=324140672]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StartHost" type="Button" parent="MarginContainer/VBoxContainer/BotomRow" unique_id=949692108]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ForceStart"
+
+[node name="ReadyButton" type="Button" parent="MarginContainer/VBoxContainer/BotomRow" unique_id=2093990894]
+layout_mode = 2
+toggle_mode = true
+text = "Ready"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TopRow/QuitButon" to="." method="_on_quit_buton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KickAll" to="." method="_on_kick_all_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainRow/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/HostPick" to="." method="_on_host_pick_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BotomRow/StartHost" to="." method="_on_start_host_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BotomRow/ReadyButton" to="." method="_on_ready_button_pressed"]

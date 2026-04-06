@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://cyjb70jp3aa01"]
+
+[ext_resource type="Script" uid="uid://cuy85h70otjem" path="res://Network/Menus/Lobby/menu_box.gd" id="1_qp4md"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwhf"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(1, 0, 0, 1)
+grow = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4r14"]
+albedo_color = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+emission_enabled = true
+emission = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(0.2844212, 0.6297701, 9.62615e-07, 1)
+grow = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ge1hh"]
+albedo_color = Color(0, 0.23333359, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.23333359, 1, 1)
+anisotropy = -1.0
+backlight_enabled = true
+backlight = Color(0, 0.23333359, 1, 1)
+grow = true
+
+[sub_resource type="Environment" id="Environment_8gwhf"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+glow_bloom = 0.48
+
+[node name="TingambobCubosNeon" type="SubViewport" unique_id=663414329]
+handle_input_locally = false
+msaa_3d = 3
+size = Vector2i(582, 486)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1097713551]
+
+[node name="MenuBox" type="CSGCombiner3D" parent="Node3D" unique_id=1822320205]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.49999997, 0.49999997, -0.70710677, 0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8gwhf")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("1_qp4md")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/MenuBox" unique_id=1234333901]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/MenuBox" unique_id=775623789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.91625977, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/MenuBox" unique_id=1658303670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/MenuBox" unique_id=797920105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.008056641)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.92041016)
+
+[node name="MenuBox2" type="CSGCombiner3D" parent="Node3D" unique_id=1248116230]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_g4r14")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("1_qp4md")
+VelocidadGiro = Vector3(0, 1, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/MenuBox2" unique_id=525955613]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/MenuBox2" unique_id=583831053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0034179685, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.9013672, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/MenuBox2" unique_id=1175793975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/MenuBox2" unique_id=1584843921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.000183106)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.9046631)
+
+[node name="MenuBox3" type="CSGCombiner3D" parent="Node3D" unique_id=1327443686]
+transform = Transform3D(-2.6008276e-08, 0.42072853, 0.42072853, 0, 0.42072853, -0.42072853, -0.595, -1.839063e-08, -1.839063e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ge1hh")
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("1_qp4md")
+VelocidadGiro = Vector3(1, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/MenuBox3" unique_id=402484914]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/MenuBox3" unique_id=895624005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, 0.0011291504, 0)
+operation = 2
+size = Vector3(0.91625977, 0.9154663, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/MenuBox3" unique_id=1865415062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010864258, -0.025016785, 0.00061035156)
+operation = 2
+size = Vector3(0.91625977, 1.3235321, 0.9177246)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/MenuBox3" unique_id=1619592200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04348755, 0.0011291504, 0.008056641)
+operation = 2
+size = Vector3(1.1619263, 0.9154663, 0.92041016)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=983164153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.019778)
+projection = 1
+size = 2.1149476
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1620878227]
+environment = SubResource("Environment_8gwhf")

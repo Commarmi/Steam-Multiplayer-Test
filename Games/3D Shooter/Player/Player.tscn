@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bn7lxkjl8npq0"]
+
+[ext_resource type="Script" uid="uid://cjbqtl0ah8g1x" path="res://Games/3D Shooter/Player/Player.gd" id="1_01m4s"]
+[ext_resource type="Script" uid="uid://ca2riuhvrn2ms" path="res://Games/3D Shooter/Player/3d_input_handler.gd" id="2_3n17f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nj0i7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n2t3h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01m4s"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_01m4s"]
+text = "Nombre Player"
+font_size = 21
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_01m4s"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Head:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D" unique_id=352733253]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_01m4s")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=500269767]
+mesh = SubResource("CapsuleMesh_nj0i7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1596027699]
+shape = SubResource("CapsuleShape3D_n2t3h")
+
+[node name="Head" type="Node3D" parent="." unique_id=232844532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.797836, 0)
+
+[node name="CamaraPlayer" type="Camera3D" parent="Head" unique_id=315390766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13204098, 0)
+current = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Head" unique_id=1584260014]
+transform = Transform3D(0.7125773, 0, 0, 0, 0.35357296, 0, 0, 0, 1.2394197, 0, -0.23036933, -0.2923802)
+material_override = SubResource("StandardMaterial3D_01m4s")
+size = Vector3(1, 1, 0.52819824)
+
+[node name="InteractCast" type="RayCast3D" parent="Head" unique_id=961795172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23704612, 0)
+target_position = Vector3(0, 0, -5)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=526697949]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.1654384, 0)
+visible = false
+billboard = 1
+text = "NombrePlayer"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1905967368]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.1973032, 0)
+mesh = SubResource("TextMesh_01m4s")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1774851149]
+replication_config = SubResource("SceneReplicationConfig_01m4s")
+
+[node name="3DInputHandler" type="Node" parent="." unique_id=1963128122 node_paths=PackedStringArray("P")]
+script = ExtResource("2_3n17f")
+P = NodePath("..")
+
+[node name="FootCast" type="RayCast3D" parent="." unique_id=1734588465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96731794, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="StepCast" type="RayCast3D" parent="." unique_id=1289891945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55199116, 0)
+target_position = Vector3(0, 0, -1)

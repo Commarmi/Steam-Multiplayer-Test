@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://chiasar6cm6vt"]
+
+[ext_resource type="Script" uid="uid://bshtu8paxiqv7" path="res://Network/Beta/network_managerBeta.gd" id="1_rftfn"]
+[ext_resource type="PackedScene" uid="uid://c2d24f8uyf0kb" path="res://Games/GameBeta/Player/player_.tscn" id="2_ene7p"]
+[ext_resource type="Script" uid="uid://t01px3s2mfws" path="res://Games/GameBeta/game.gd" id="3_bhgdw"]
+[ext_resource type="PackedScene" uid="uid://dssf4858mdy36" path="res://Games/GameBeta/Maps/MapaTest1.tscn" id="4_svj4y"]
+
+[node name="NetworkManager" type="Node" unique_id=1223715632]
+script = ExtResource("1_rftfn")
+player_scene = ExtResource("2_ene7p")
+
+[node name="Game" type="Node2D" parent="." unique_id=1457746832 node_paths=PackedStringArray("Map")]
+script = ExtResource("3_bhgdw")
+Map = NodePath("MapaTest2")
+metadata/_custom_type_script = "uid://t01px3s2mfws"
+
+[node name="MapaTest2" parent="Game" unique_id=435165712 instance=ExtResource("4_svj4y")]
+
+[node name="Control" type="Control" parent="." unique_id=1339811507]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=384471184]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 94.0
+offset_bottom = 41.0
+
+[node name="HostButon" type="Button" parent="Control/HBoxContainer" unique_id=24047422]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButon" type="Button" parent="Control/HBoxContainer" unique_id=1968174178]
+layout_mode = 2
+text = "Join"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=2099135350]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 53.0
+offset_right = 263.0
+offset_bottom = 377.0
+
+[node name="ListaPartidas" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=652724079]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/ScrollContainer/ListaPartidas" unique_id=1084745503]
+layout_mode = 2
+text = "Partidas:"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=730155323]
+spawn_path = NodePath("../Game/MapaTest2")
+
+[connection signal="pressed" from="Control/HBoxContainer/HostButon" to="." method="host_game"]
+[connection signal="pressed" from="Control/HBoxContainer/JoinButon" to="." method="search_lobbies"]

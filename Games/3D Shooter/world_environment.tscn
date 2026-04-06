@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://djhofisw6adxx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqay2"]
+sky_top_color = Color(0, 0.454892, 0.798777, 1)
+sky_horizon_color = Color(0.438889, 0.681309, 0.884422, 1)
+sun_angle_max = 90.0
+
+[sub_resource type="Sky" id="Sky_oetx6"]
+sky_material = SubResource("ProceduralSkyMaterial_hqay2")
+
+[sub_resource type="Environment" id="Environment_r30ml"]
+background_mode = 2
+sky = SubResource("Sky_oetx6")
+ambient_light_source = 1
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+glow_levels/1 = 128.0
+glow_levels/2 = 64.0
+glow_levels/3 = 32.0
+glow_levels/4 = 16.0
+glow_levels/5 = 8.0
+glow_levels/6 = 4.0
+glow_levels/7 = 2.0
+glow_normalized = true
+glow_blend_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_r30ml")

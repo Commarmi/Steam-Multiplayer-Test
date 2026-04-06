@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameClass" format=3 uid="uid://bl03mvvu8rgmv"]
+
+[ext_resource type="PackedScene" uid="uid://dks2qbyffqdtl" path="res://Games/3D Shooter/Root3DGame.tscn" id="1_50ikk"]
+[ext_resource type="Script" uid="uid://d3tnwa4lg6x0m" path="res://Network/GameClass.gd" id="1_urpwy"]
+
+[resource]
+script = ExtResource("1_urpwy")
+RootSceen = ExtResource("1_50ikk")
+metadata/_custom_type_script = "uid://d3tnwa4lg6x0m"
