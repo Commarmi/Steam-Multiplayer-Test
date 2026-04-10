@@ -79,9 +79,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6554718, 1.893806, -0.89489
 material_override = SubResource("StandardMaterial3D_g8vi4")
 size = Vector3(1, 3.7020264, 1)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1499882862]
-transform = Transform3D(1, 0, 0, 0, 0.8381283, 0.5454731, 0, -0.5454731, 0.8381283, 0, 1.9110346, 7.2061925)
-
 [node name="WorldEnvironment" parent="." unique_id=449474530 instance=ExtResource("1_g8vi4")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=980876790]
@@ -199,6 +196,7 @@ size = Vector3(1, 0.25146484, 4.4970703)
 shape = SubResource("ConcavePolygonShape3D_o42d6")
 
 [node name="Players" type="Node3D" parent="." unique_id=1373354030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7655, 5.4629188, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=968362515]
 _spawnable_scenes = PackedStringArray("uid://bn7lxkjl8npq0")

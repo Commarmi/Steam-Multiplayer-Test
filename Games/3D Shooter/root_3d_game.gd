@@ -3,6 +3,7 @@ class_name Root3dGame
 
 @onready var contenedor_jugadores = $Players
 var player_scene = preload("uid://bn7lxkjl8npq0")
+var NPlayers:int=0
 
 func _ready():
 	# Comprobamos si somos el Host/Servidor
@@ -43,6 +44,6 @@ func spawnear_jugador(peer_id: int):
 	# para que hagan lo mismo en sus pantallas.
 	
 	contenedor_jugadores.add_child(nuevo_jugador)
-	nuevo_jugador.global_position.y+=2
-	nuevo_jugador.global_position.x+=4
 	
+	nuevo_jugador.global_position.x+=NPlayers*2
+	NPlayers+=1
