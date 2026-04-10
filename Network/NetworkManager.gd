@@ -93,11 +93,13 @@ func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response:
 		
 		if host_steam_id == Steam.getSteamID(): return
 		
-		peer = SteamMultiplayerPeer.new() # Creamos el peer fresco
+		peer = SteamMultiplayerPeer.new()
 		var error: Error = peer.create_client(host_steam_id, 0)
 		if error == OK:
 			multiplayer.multiplayer_peer = peer
 			print("Cliente esperando conexión P2P...")
+			# ¡Corregido! Ahora avisamos al StarMenu para que haga el cambio de escena seguro
+			lobby_joined_success.emit()
 
 # ==========================================
 # MIGRACIÓN DE HOST Y DESCONEXIONES
@@ -144,7 +146,7 @@ func _reconnect_to_new_host(new_host_steam_id: int) -> void:
 		multiplayer.multiplayer_peer = peer
 
 # ==========================================
-# GESTION DE RECURSOS (RPCs)
+# GESTION DE RECURSOS (RPCs - HANDSHAKE CORREGIDO)
 # ==========================================
 func _register_self_player() -> void:
 	var mi_id = Steam.getSteamID()
@@ -158,25 +160,37 @@ func _register_self_player() -> void:
 	player_list_updated.emit()
 
 func _on_peer_connected(id_red: int) -> void:
-	if id_red != 1: 
-		if not multiplayer.is_server() and id_red == 1:
-			lobby_joined_success.emit()
-		rpc_id(id_red, "request_player_info")
+	if multiplayer.is_server():
+		# SOY EL HOST: Alguien nuevo ha entrado. 
+		# Le envío la lista de TODOS los jugadores que ya están en la sala.
+		for s_id in connected_players:
+			var p = connected_players[s_id]
+			recibir_info_existente.rpc_id(id_red, p.steam_id, p.peer_id, p.nombre)
+	else:
+		# SOY EL CLIENTE: Me acabo de conectar al Host (id_red == 1).
+		# Le envío mis datos a TODOS los jugadores de la sala para que me añadan.
+		if id_red == 1:
+			registrar_nuevo_jugador.rpc(Steam.getSteamID(), Steam.getPersonaName())
 
+# El Host llama a esto en el PC del nuevo cliente para enseñarle quién está en la sala
 @rpc("authority", "reliable")
-func request_player_info() -> void:
-	receive_player_info.rpc(Steam.getSteamID(), Steam.getPersonaName())
+func recibir_info_existente(steam_id: int, p_id: int, p_name: String) -> void:
+	if not connected_players.has(steam_id):
+		var nuevo_jugador = OnlinePlayer.new()
+		nuevo_jugador.configurar(steam_id, p_id, p_name)
+		connected_players[steam_id] = nuevo_jugador
+		player_list_updated.emit()
 
+# El nuevo cliente llama a esto en los PCs de todos los demás para presentarse
 @rpc("any_peer", "call_local", "reliable")
-func receive_player_info(steam_id: int, persona_name: String) -> void:
+func registrar_nuevo_jugador(steam_id: int, p_name: String) -> void:
 	var sender_peer_id = multiplayer.get_remote_sender_id()
 	
-	var nuevo_jugador = OnlinePlayer.new()
-	nuevo_jugador.configurar(steam_id, sender_peer_id, persona_name)
-	
-	connected_players[steam_id] = nuevo_jugador
-	player_list_updated.emit()
-
+	if not connected_players.has(steam_id):
+		var nuevo_jugador = OnlinePlayer.new()
+		nuevo_jugador.configurar(steam_id, sender_peer_id, p_name)
+		connected_players[steam_id] = nuevo_jugador
+		player_list_updated.emit()
 # ==========================================
 # FUNCIONES DE ADMINISTRACIÓN (KICK)
 # ==========================================
@@ -206,7 +220,7 @@ func _force_disconnect_and_leave() -> void:
 	# Usamos la función central de limpieza
 	cleanup_network() 
 	
-	get_tree().change_scene_to_file("res://Scenes/StarMenu.tscn") 
+	get_tree().change_scene_to_file("uid://bab52ebjkkhah") 
 
 @rpc("authority", "reliable")
 func _remove_kicked_player_locally(target_steam_id: int) -> void:
@@ -289,7 +303,12 @@ func estan_todos_listos() -> bool:
 
 func PlayerLeave():
 	if current_lobby_id > 0:
+		if multiplayer.is_server():
+			# BUG 3 FIX: Hacemos la sala invisible/cerrada antes de salir para que nadie más la encuentre
+			Steam.setLobbyJoinable(current_lobby_id, false)
+			
 		Steam.leaveLobby(current_lobby_id)
+		
 	cleanup_network()
 	get_tree().change_scene_to_file("uid://bab52ebjkkhah")
 

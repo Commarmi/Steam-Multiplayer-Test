@@ -40,13 +40,13 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=840118377]
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xs5ms")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=199948049]
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=68996068]
 layout_mode = 2
@@ -71,13 +71,15 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="Search" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=52966433]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 text = "Search"
 
 [node name="Host" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=836721687]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 text = "Host"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/Search" to="." method="_on_search_pressed"]

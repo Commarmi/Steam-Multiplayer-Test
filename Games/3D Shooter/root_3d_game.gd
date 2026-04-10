@@ -44,3 +44,5 @@ func spawnear_jugador(peer_id: int):
 	
 	contenedor_jugadores.add_child(nuevo_jugador)
 	nuevo_jugador.global_position.y+=2
+	nuevo_jugador.global_position.x+=4
+	
