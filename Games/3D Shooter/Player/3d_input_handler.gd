@@ -6,7 +6,9 @@ func _physics_process(delta):
 	# 1. ¡EL ESCUDO MULTIJUGADOR!
 	# Si este script se está ejecutando en el clon de otro jugador, 
 	# ignoramos los inputs (hacemos un "return" para salir de la función).
+	
 	if not is_multiplayer_authority():
+		
 		return
 	
 	# 2. Solo el dueño real del personaje llegará a esta parte del código.

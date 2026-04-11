@@ -27,6 +27,25 @@ var subiendo_escalon: bool = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	var peer_id = name.to_int()
+	
+	# Buscamos en el diccionario global de CADA cliente
+	if NetworkManager.connected_players.has(peer_id):
+		# El diccionario ahora guarda objetos OnlinePlayer, sacamos el ".nombre"
+		var nombre_real = NetworkManager.connected_players[peer_id].nombre
+		$Label3D.text = nombre_real
+		$Head/MeshInstance3D.mesh.text = nombre_real
+	else:
+		# Por si juegas tú solo en pruebas locales
+		$Label3D.text = Steam.getPersonaName()
+		$Head/MeshInstance3D.mesh.text = Steam.getPersonaName()
+
+	# 2. ACTIVAR CONTROLES: Solo si yo soy el dueño de este muñeco
+	if is_multiplayer_authority():
+		# Aquí activas la cámara y capturas el ratón
+		# Ejemplo: camera.current = true
+		pass
+
 
 func Iniciar(Nombre:String):
 	

@@ -52,15 +52,15 @@ size = Vector3(1, 1, 0.52819824)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23704612, 0)
 target_position = Vector3(0, 0, -5)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=1905967368]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.39946717, 0)
+mesh = SubResource("TextMesh_01m4s")
+
 [node name="Label3D" type="Label3D" parent="." unique_id=526697949]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.1654384, 0)
 visible = false
 billboard = 1
 text = "NombrePlayer"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1905967368]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.1973032, 0)
-mesh = SubResource("TextMesh_01m4s")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1774851149]
 replication_config = SubResource("SceneReplicationConfig_01m4s")
