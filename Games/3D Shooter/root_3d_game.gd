@@ -48,3 +48,5 @@ func spawnear_jugador(steam_id: int, godot_peer_id: int):
 	
 	nuevo_jugador.global_position.x += NPlayers * 2
 	NPlayers += 1
+
+func _process(delta):$CanvasLayer/MarginContainer/HBoxContainer/Label.set_text("FPS " + str(Engine.get_frames_per_second()))

@@ -40,26 +40,44 @@ func _enter_tree():
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	var peer_id = name.to_int() # (Sigue siendo el Steam ID)
+	var steam_id = name.to_int()
 	
-	# Ponemos el texto de los nombres (Esto va en el ready porque 
-	# los nodos hijos como $Label3D no existen en el _enter_tree aún)
-	if NetworkManager.connected_players.has(peer_id):
-		var nombre_real = NetworkManager.connected_players[peer_id].nombre
-		$Label3D.text = nombre_real
-		$Head/MeshInstance3D.mesh.text = nombre_real
-	else:
-		$Label3D.text = Steam.getPersonaName()
-		$Head/MeshInstance3D.mesh.text = Steam.getPersonaName()
+	# ---------------------------------------------------------
+	# 1. SI ESTE MUÑECO SOY YO (Autoridad)
+	# ---------------------------------------------------------
 	if is_multiplayer_authority():
-		# ¡Hacemos que esta cámara sea la principal solo para el dueño!
 		camera.current = true
+		$Label3D.visible = false # Ocultamos el texto para que no nos tape la vista
 		
-		# (Opcional pero recomendado) Oculta tu propio texto para no verlo flotando en tu cara
-		$Label3D.visible = false 
+		if Engine.has_singleton("Steam"):
+			var mi_nombre = Steam.getPersonaName()
+			$Label3D.text = mi_nombre
+			$Head/MeshInstance3D.mesh.text = mi_nombre
+			
+	# ---------------------------------------------------------
+	# 2. SI ESTE MUÑECO ES OTRO JUGADOR (Clon)
+	# ---------------------------------------------------------
 	else:
-		# Nos aseguramos de que las cámaras de los demás estén apagadas en nuestra pantalla
-		camera.current = false
+		camera.current = false # Apagamos su cámara en nuestra pantalla
+		
+		# Intento A: Lo buscamos en nuestro NetworkManager
+		if NetworkManager.connected_players.has(steam_id):
+			var nombre_real = NetworkManager.connected_players[steam_id].nombre
+			$Label3D.text = nombre_real
+			$Head/MeshInstance3D.mesh.text = nombre_real
+			
+		# Intento B: Si el diccionario falló/va tarde, le preguntamos a Steam directamente
+		elif Engine.has_singleton("Steam"):
+			var nombre_amigo = Steam.getFriendPersonaName(steam_id)
+			
+			if nombre_amigo != "":
+				$Label3D.text = nombre_amigo
+				$MeshInstance3D.mesh.text = nombre_amigo
+			else:
+				# Si Steam también falla (ej. testing sin red), le ponemos una ID genérica
+				$Label3D.text = "Jugador_" + str(steam_id).left(4)
+				$MeshInstance3D.mesh.text = "Jugador_" + str(steam_id).left(4)
+
 
 
 
