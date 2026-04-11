@@ -37,19 +37,14 @@ func _ready():
 				# Pasamos AMBAS IDs
 				spawnear_jugador(steam_id, godot_peer_id)
 
-# Ahora recibimos los dos números por separado
 func spawnear_jugador(steam_id: int, godot_peer_id: int):
 	var nuevo_jugador: Player3D = player_scene.instantiate()
 	
-	# 1. Le ponemos el STEAM ID como nombre para poder buscar en el diccionario
+	# 1. Solo le ponemos el STEAM ID como nombre
 	nuevo_jugador.name = str(steam_id)
 	
-	# 2. ¡LA MAGIA! Le damos el control usando el GODOT PEER ID real
-	nuevo_jugador.set_multiplayer_authority(godot_peer_id)
-	
-	# 3. Lo añadimos al mundo
+	# 2. Lo añadimos al mundo
 	contenedor_jugadores.add_child(nuevo_jugador)
 	
-	# 4. Ajustamos la posición
 	nuevo_jugador.global_position.x += NPlayers * 2
 	NPlayers += 1

@@ -25,26 +25,38 @@ var gravity = 9.8
 @onready var StepCast = $StepCast
 var subiendo_escalon: bool = false
 
+# --- ESTO ES NUEVO Y EVITA EL ERROR C++ ---
+func _enter_tree():
+	# Sacamos el Steam ID de nuestro propio nombre de nodo
+	var mi_steam_id = name.to_int()
+	
+	# Buscamos nuestra ID de red en el diccionario y nos damos la autoridad
+	if NetworkManager.connected_players.has(mi_steam_id):
+		var id_de_red_real = NetworkManager.connected_players[mi_steam_id].peer_id
+		set_multiplayer_authority(id_de_red_real)
+
+
+# --- TU _READY DEBE QUEDAR ASÍ ---
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	var peer_id = name.to_int()
 	
-	# Buscamos en el diccionario global de CADA cliente
+	var peer_id = name.to_int() # (Sigue siendo el Steam ID)
+	
+	# Ponemos el texto de los nombres (Esto va en el ready porque 
+	# los nodos hijos como $Label3D no existen en el _enter_tree aún)
 	if NetworkManager.connected_players.has(peer_id):
-		# El diccionario ahora guarda objetos OnlinePlayer, sacamos el ".nombre"
 		var nombre_real = NetworkManager.connected_players[peer_id].nombre
 		$Label3D.text = nombre_real
-		$Head/MeshInstance3D.mesh.text = nombre_real
+		$MeshInstance3D.mesh.text = nombre_real
 	else:
-		# Por si juegas tú solo en pruebas locales
 		$Label3D.text = Steam.getPersonaName()
-		$Head/MeshInstance3D.mesh.text = Steam.getPersonaName()
+		$MeshInstance3D.mesh.text = Steam.getPersonaName()
 
-	# 2. ACTIVAR CONTROLES: Solo si yo soy el dueño de este muñeco
+	# Activamos cosas solo si somos los dueños
 	if is_multiplayer_authority():
-		# Aquí activas la cámara y capturas el ratón
-		# Ejemplo: camera.current = true
+		# camera.current = true
 		pass
+
 
 
 func Iniciar(Nombre:String):
