@@ -47,10 +47,10 @@ func _ready():
 	if NetworkManager.connected_players.has(peer_id):
 		var nombre_real = NetworkManager.connected_players[peer_id].nombre
 		$Label3D.text = nombre_real
-		$MeshInstance3D.mesh.text = nombre_real
+		$Head/MeshInstance3D.mesh.text = nombre_real
 	else:
 		$Label3D.text = Steam.getPersonaName()
-		$MeshInstance3D.mesh.text = Steam.getPersonaName()
+		$Head/MeshInstance3D.mesh.text = Steam.getPersonaName()
 
 	# Activamos cosas solo si somos los dueños
 	if is_multiplayer_authority():
