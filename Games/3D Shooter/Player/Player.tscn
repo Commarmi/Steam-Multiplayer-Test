@@ -41,7 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.797836, 0)
 
 [node name="CamaraPlayer" type="Camera3D" parent="Head" unique_id=315390766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13204098, 0)
-current = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Head" unique_id=1584260014]
 transform = Transform3D(0.7125773, 0, 0, 0, 0.35357296, 0, 0, 0, 1.2394197, 0, -0.23036933, -0.2923802)

@@ -51,6 +51,17 @@ func _ready():
 	else:
 		$Label3D.text = Steam.getPersonaName()
 		$Head/MeshInstance3D.mesh.text = Steam.getPersonaName()
+	if is_multiplayer_authority():
+		# ¡Hacemos que esta cámara sea la principal solo para el dueño!
+		camera.current = true
+		
+		# (Opcional pero recomendado) Oculta tu propio texto para no verlo flotando en tu cara
+		$Label3D.visible = false 
+	else:
+		# Nos aseguramos de que las cámaras de los demás estén apagadas en nuestra pantalla
+		camera.current = false
+
+
 
 	# Activamos cosas solo si somos los dueños
 	if is_multiplayer_authority():
