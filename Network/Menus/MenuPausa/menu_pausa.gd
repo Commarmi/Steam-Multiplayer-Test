@@ -13,12 +13,17 @@ func _on_quit_pressed():
 #para que no se pueda controlar voy a usar la peor solucion
 #guardar i borrar temporalmente las teclas de los Input events registrados
 #i antes de despausar se reccolocan pero me da palo hacerlo ahora
-
+var UltimoEstado:bool
 func AlternarEstado():
-	visible=!visible
-	if Input.mouse_mode==2:Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	if visible==false:
+		UltimoEstado=Input.mouse_mode==Input.MOUSE_MODE_VISIBLE
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		if UltimoEstado==false :Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	visible=!visible
+	prints(UltimoEstado,visible==false)
 	
 
 func _on_close_pressed():

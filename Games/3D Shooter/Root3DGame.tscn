@@ -28,6 +28,7 @@ data = PackedVector3Array(-0.5, -0.5, -3.9970703, 0.5, -0.5, -3.9970703, -0.5, -
 script = ExtResource("1_nkx4t")
 
 [node name="Mapa" type="StaticBody3D" parent="." unique_id=2080335768]
+collision_layer = 3
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Mapa" unique_id=48291585]
 
@@ -95,6 +96,7 @@ shadow_enabled = true
 
 [node name="Acensor" type="StaticBody3D" parent="." unique_id=1378914175]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.992344, 14, 0)
+collision_layer = 3
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Acensor" unique_id=1849336530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73698616, 1.4154575)
@@ -157,6 +159,7 @@ replication_config = SubResource("SceneReplicationConfig_nkx4t")
 
 [node name="Escalera" type="StaticBody3D" parent="." unique_id=1644745210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.392805, 0.6306288, 0)
+collision_layer = 3
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Escalera" unique_id=1257085495]
 
