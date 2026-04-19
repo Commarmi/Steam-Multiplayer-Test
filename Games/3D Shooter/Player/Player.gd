@@ -24,6 +24,7 @@ var gravity = 9.8
 @onready var FootCast = $FootCast
 @onready var StepCast = $StepCast
 var subiendo_escalon: bool = false
+@onready var InteractCast = $Head/InteractCast
 
 # --- ESTO ES NUEVO Y EVITA EL ERROR C++ ---
 func _enter_tree():
@@ -191,3 +192,17 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+func Interactuar():
+	if InteractCast.is_colliding():
+		var objeto_golpeado = InteractCast.get_collider()
+		
+		
+		# 1. Comprobamos si el objeto golpeado directamente es interactuable
+		if objeto_golpeado is Interactable:
+			objeto_golpeado.activar.rpc()
+			
+		# 2. ¡AQUÍ ESTABA EL ERROR! Usamos 'elif' en lugar de 'else:if'
+		elif (objeto_golpeado.get_parent()) is Interactable:
+			
+			objeto_golpeado.get_parent().rpc()

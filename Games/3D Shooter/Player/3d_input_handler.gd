@@ -17,5 +17,5 @@ func _physics_process(delta):
 	
 	P.MoveInDirection(input_dir, Sprinting, delta)
 	
-	if Input.is_action_just_pressed("Espacio"):
-		P.Jump()
+	if Input.is_action_pressed("Ataque"):P.Interactuar()
+	if Input.is_action_just_pressed("Espacio"):P.Jump()

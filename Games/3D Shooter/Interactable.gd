@@ -1,4 +1,4 @@
-#@abstract
+@abstract
 @tool # Permite que este código funcione dentro del editor de Godot
 extends Node3D
 class_name Interactable
@@ -37,8 +37,10 @@ func _get_property_list() -> Array:
 	return properties
 
 # Tu función para llamar desde fuera
+@rpc("any_peer", "call_local", "reliable")
 func activar() -> void:
 	# Evitamos que se ejecute si estamos tocando cosas en el editor
+	print("Interactuando con ", self)
 	if Engine.is_editor_hint(): 
 		return 
 		
