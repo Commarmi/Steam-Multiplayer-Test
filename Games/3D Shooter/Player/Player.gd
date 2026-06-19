@@ -205,4 +205,4 @@ func Interactuar():
 		# 2. ¡AQUÍ ESTABA EL ERROR! Usamos 'elif' en lugar de 'else:if'
 		elif (objeto_golpeado.get_parent()) is Interactable:
 			
-			objeto_golpeado.get_parent().rpc()
+			objeto_golpeado.get_parent().activar.rpc()

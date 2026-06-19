@@ -291,7 +291,7 @@ nombre_del_metodo = "hide"
 [node name="BotonInteractuable2" parent="." unique_id=139950853 node_paths=PackedStringArray("nodo_objetivo") instance=ExtResource("6_c4si2")]
 transform = Transform3D(-0.15110561, 0, -0.98851776, 0, 1, 0, 0.98851776, 0, -0.15110561, 8.353434, 1.6404343, -4.2837634)
 nodo_objetivo = NodePath("../Acensor/TweenAnimation")
-nombre_del_metodo = "play"
+nombre_del_metodo = "playback"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=239690191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.263443, 10.772548, 0)
