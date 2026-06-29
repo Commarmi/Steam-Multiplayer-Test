@@ -1,7 +1,8 @@
-extends PanelContainer
+extends MarginContainer
 class_name StarMenu
 
 @onready var match_holder = %MatchHolder
+@onready var label = $PanelContainer/VBoxContainer/Label
 
 # Exportamos la escena del lobby para arrastrarla en el inspector
 @export var lobby_scene: PackedScene 
@@ -9,7 +10,7 @@ class_name StarMenu
 func _ready() -> void:
 	# Escuchamos los resultados de búsqueda
 	NetworkManager.search_results_updated.connect(_on_search_results_received)
-	$MarginContainer/PanelContainer/VBoxContainer/Label.text=Steam.getPersonaName()
+	label.text=Steam.getPersonaName()
 	# Escuchamos cuando la conexión a la sala es exitosa para cambiar de escena
 	NetworkManager.lobby_joined_success.connect(_go_to_lobby)
 

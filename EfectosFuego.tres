@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://xgbdg3xfh1ee"]
+
+[ext_resource type="Shader" uid="uid://d3o625rslqfx4" path="res://ShaderFondo.tres" id="1_bpx3u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bloe8"]
+frequency = 0.0064
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5gjdg"]
+noise = SubResource("FastNoiseLite_bloe8")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_q7qbq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fc0e3"]
+seed = 10
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7jktm"]
+noise = SubResource("FastNoiseLite_fc0e3")
+color_ramp = SubResource("Gradient_q7qbq")
+seamless = true
+
+[resource]
+shader = ExtResource("1_bpx3u")
+shader_parameter/Vector2Parameter = Vector2(0.03, 0.03)
+shader_parameter/TextureBase = SubResource("NoiseTexture2D_5gjdg")
+shader_parameter/Vector2Parameter2 = Vector2(0.005, 0.005)
+shader_parameter/TextureBase2 = SubResource("NoiseTexture2D_7jktm")
