@@ -51,9 +51,7 @@ func _ready():
 		$Label3D.visible = false # Ocultamos el texto para que no nos tape la vista
 		
 		if Engine.has_singleton("Steam"):
-			var mi_nombre = Steam.getPersonaName()
-			$Label3D.text = mi_nombre
-			$Head/MeshInstance3D.mesh.text = mi_nombre
+			Iniciar(Steam.getPersonaName())
 			
 	# ---------------------------------------------------------
 	# 2. SI ESTE MUÑECO ES OTRO JUGADOR (Clon)
@@ -63,37 +61,30 @@ func _ready():
 		
 		# Intento A: Lo buscamos en nuestro NetworkManager
 		if NetworkManager.connected_players.has(steam_id):
-			var nombre_real = NetworkManager.connected_players[steam_id].nombre
-			$Label3D.text = nombre_real
-			$Head/MeshInstance3D.mesh.text = nombre_real
+			Iniciar(NetworkManager.connected_players[steam_id].nombre)
 			
 		# Intento B: Si el diccionario falló/va tarde, le preguntamos a Steam directamente
 		elif Engine.has_singleton("Steam"):
 			var nombre_amigo = Steam.getFriendPersonaName(steam_id)
 			
 			if nombre_amigo != "":
-				$Label3D.text = nombre_amigo
-				$MeshInstance3D.mesh.text = nombre_amigo
+				Iniciar(nombre_amigo)
 			else:
 				# Si Steam también falla (ej. testing sin red), le ponemos una ID genérica
-				$Label3D.text = "Jugador_" + str(steam_id).left(4)
-				$MeshInstance3D.mesh.text = "Jugador_" + str(steam_id).left(4)
+				Iniciar("Jugador_" + str(steam_id).left(4))
+		else:
+			Iniciar("Jugador_" + str(steam_id).left(4))
 
 
-
-
-	# Activamos cosas solo si somos los dueños
-	if is_multiplayer_authority():
-		# camera.current = true
-		pass
-
-
-
-func Iniciar(Nombre:String):
+func Iniciar(Nombre: String):
+	# Ponemos el nombre en el Label flotante
+	$Label3D.text = Nombre
 	
-	$Label3D.text=Nombre
-	$MeshInstance3D.mesh.text=Nombre
-
+	# Comprobamos la ruta correcta del MeshInstance3D para evitar errores
+	if has_node("Head/MeshInstance3D"):
+		$Head/MeshInstance3D.mesh.text = Nombre
+	elif has_node("MeshInstance3D"):
+		$MeshInstance3D.mesh.text = Nombre
 func _unhandled_input(event):
 	if not is_multiplayer_authority():
 		return
