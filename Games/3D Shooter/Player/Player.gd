@@ -16,7 +16,6 @@ var t_bob = 0.0
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
 
 @onready var head = $Head
@@ -26,65 +25,61 @@ var gravity = 9.8
 var subiendo_escalon: bool = false
 @onready var InteractCast = $Head/InteractCast
 
-# --- ESTO ES NUEVO Y EVITA EL ERROR C++ ---
 func _enter_tree():
-	# Sacamos el Steam ID de nuestro propio nombre de nodo
 	var mi_steam_id = name.to_int()
 	
-	# Buscamos nuestra ID de red en el diccionario y nos damos la autoridad
 	if NetworkManager.connected_players.has(mi_steam_id):
 		var id_de_red_real = NetworkManager.connected_players[mi_steam_id].peer_id
 		set_multiplayer_authority(id_de_red_real)
 
-
-# --- TU _READY DEBE QUEDAR ASÍ ---
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	var steam_id = name.to_int()
-	
-	# ---------------------------------------------------------
-	# 1. SI ESTE MUÑECO SOY YO (Autoridad)
-	# ---------------------------------------------------------
 	if is_multiplayer_authority():
+		# 1. SOY EL JUGADOR LOCAL
 		camera.current = true
-		$Label3D.visible = false # Ocultamos el texto para que no nos tape la vista
+		$Label3D.visible = false
 		
+		var mi_nombre = "Jugador Local"
 		if Engine.has_singleton("Steam"):
-			Iniciar(Steam.getPersonaName())
+			mi_nombre = Steam.getPersonaName()
 			
-	# ---------------------------------------------------------
-	# 2. SI ESTE MUÑECO ES OTRO JUGADOR (Clon)
-	# ---------------------------------------------------------
-	else:
-		camera.current = false # Apagamos su cámara en nuestra pantalla
+		# Me asigno el nombre a mí mismo
+		Iniciar(mi_nombre)
 		
-		# Intento A: Lo buscamos en nuestro NetworkManager
+		# Le exijo a todos los demás clientes conectados que actualicen MI nombre en sus pantallas
+		rpc("SincronizarNombre", mi_nombre)
+		
+	else:
+		# 2. ES EL CLON DE OTRO JUGADOR
+		camera.current = false
+		
+		# Intento inicial (por si el nombre ya está en el diccionario de forma local)
+		var steam_id = name.to_int()
 		if NetworkManager.connected_players.has(steam_id):
 			Iniciar(NetworkManager.connected_players[steam_id].nombre)
-			
-		# Intento B: Si el diccionario falló/va tarde, le preguntamos a Steam directamente
-		elif Engine.has_singleton("Steam"):
-			var nombre_amigo = Steam.getFriendPersonaName(steam_id)
-			
-			if nombre_amigo != "":
-				Iniciar(nombre_amigo)
-			else:
-				# Si Steam también falla (ej. testing sin red), le ponemos una ID genérica
-				Iniciar("Jugador_" + str(steam_id).left(4))
 		else:
-			Iniciar("Jugador_" + str(steam_id).left(4))
+			# Ponemos un nombre temporal de carga. El RPC "SincronizarNombre" lo sobreescribirá enseguida
+			Iniciar("Cargando...")
 
+# Esta función la reciben todos los clientes a través de la red
+@rpc("any_peer", "call_remote", "reliable")
+func SincronizarNombre(nombre_recibido: String):
+	Iniciar(nombre_recibido)
 
 func Iniciar(Nombre: String):
-	# Ponemos el nombre en el Label flotante
-	$Label3D.text = Nombre
+	# Etiqueta estándar
+	if has_node("Label3D"):
+		$Label3D.text = Nombre
 	
-	# Comprobamos la ruta correcta del MeshInstance3D para evitar errores
-	if has_node("Head/MeshInstance3D"):
+	# Manejo seguro para las mallas de texto (evita que se comparta el recurso)
+	if has_node("Head/MeshInstance3D") and $Head/MeshInstance3D.mesh != null:
+		$Head/MeshInstance3D.mesh = $Head/MeshInstance3D.mesh.duplicate() # <- CRUCIAL
 		$Head/MeshInstance3D.mesh.text = Nombre
-	elif has_node("MeshInstance3D"):
+	elif has_node("MeshInstance3D") and $MeshInstance3D.mesh != null:
+		$MeshInstance3D.mesh = $MeshInstance3D.mesh.duplicate() # <- CRUCIAL
 		$MeshInstance3D.mesh.text = Nombre
+
 func _unhandled_input(event):
 	if not is_multiplayer_authority():
 		return
