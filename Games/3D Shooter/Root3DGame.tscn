@@ -259,8 +259,9 @@ properties/3/path = NodePath(".:linear_velocity")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="Root3dGame" type="Node3D" unique_id=1129051960]
+[node name="Root3dGame" type="Node3D" unique_id=1129051960 node_paths=PackedStringArray("PuntosDeSpawn")]
 script = ExtResource("1_nkx4t")
+PuntosDeSpawn = [NodePath("PuntoSpawnTimer3D"), NodePath("PuntoSpawnTimer3D2")]
 
 [node name="Mapa" type="StaticBody3D" parent="." unique_id=2080335768]
 collision_layer = 3
