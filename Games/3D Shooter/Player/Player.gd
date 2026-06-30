@@ -24,6 +24,8 @@ var gravity = 9.8
 @onready var StepCast = $StepCast
 var subiendo_escalon: bool = false
 @onready var InteractCast = $Head/InteractCast
+var Id
+
 
 func _enter_tree():
 	var mi_steam_id = name.to_int()
@@ -31,7 +33,7 @@ func _enter_tree():
 	if NetworkManager.connected_players.has(mi_steam_id):
 		var id_de_red_real = NetworkManager.connected_players[mi_steam_id].peer_id
 		set_multiplayer_authority(id_de_red_real)
-
+		Id=id_de_red_real
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	

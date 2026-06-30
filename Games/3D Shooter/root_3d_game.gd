@@ -5,10 +5,13 @@ class_name Root3dGame
 var player_scene = preload("uid://bn7lxkjl8npq0")
 var NPlayers:int=0
 @export var PuntosDeSpawn:Array[PuntoSpawnBase3D]
+var Players:Array[Player3D]
+
 func _ready():
 	# Comprobamos si somos el Host/Servidor
+	
 	if multiplayer.is_server():
-		
+		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 		# 1. Si la lista está vacía (estamos jugando solos o testeando)
 		if NetworkManager.connected_players.is_empty():
 			# Sacamos nuestra propia ID de red (siempre será 1 aquí)
@@ -49,3 +52,10 @@ func spawnear_jugador(steam_id: int, godot_peer_id: int):
 	
 	for P in PuntosDeSpawn:
 		if P.IsAvailable():nuevo_jugador.global_position=P.GetPosition()
+	Players.append(nuevo_jugador)
+
+
+func _on_peer_disconnected(id_red: int) -> void:
+	for P in Players:if P.Id==id_red:P.queue_free()
+	
+	
