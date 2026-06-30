@@ -4,6 +4,7 @@ class_name Root3dGame
 @onready var contenedor_jugadores = $Players
 var player_scene = preload("uid://bn7lxkjl8npq0")
 var NPlayers:int=0
+@export var PuntosDeSpawn:Array[PuntoSpawnBase3D]
 func _ready():
 	# Comprobamos si somos el Host/Servidor
 	if multiplayer.is_server():
@@ -46,5 +47,5 @@ func spawnear_jugador(steam_id: int, godot_peer_id: int):
 	# 2. Lo añadimos al mundo
 	contenedor_jugadores.add_child(nuevo_jugador)
 	
-	nuevo_jugador.global_position.x += NPlayers * 2
-	NPlayers += 1
+	for P in PuntosDeSpawn:
+		if P.IsAvailable():nuevo_jugador.global_position=P.GetPosition()
