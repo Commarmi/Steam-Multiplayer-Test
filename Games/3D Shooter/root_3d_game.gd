@@ -51,7 +51,9 @@ func spawnear_jugador(steam_id: int, godot_peer_id: int):
 	contenedor_jugadores.add_child(nuevo_jugador)
 	
 	for P in PuntosDeSpawn:
-		if P.IsAvailable():nuevo_jugador.global_position=P.GetPosition()
+		if P.IsAvailable():
+			nuevo_jugador.global_position=P.GetPosition()
+			break
 	Players.append(nuevo_jugador)
 
 

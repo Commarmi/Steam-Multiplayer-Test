@@ -12,7 +12,7 @@ func _ready():
 	add_child(T)
 
  
-
+func _process(delta):prints(T.time_left,self)
 
 func IsAvailable():
 	return T.is_stopped()
