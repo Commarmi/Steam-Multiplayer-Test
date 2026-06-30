@@ -1,7 +1,6 @@
 extends MarginContainer
 class_name PlayerContainer
 
-@export var MenuRoot: Lobby # Asegúrate de que tu script del lobby tiene class_name Lobby
 
 @onready var nombre_player: Button = $HBoxContainer/NombrePlayer # Asumo que es un botón para poder pulsarlo
 @onready var kick: Button = $HBoxContainer/Kick

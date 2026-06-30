@@ -234,7 +234,6 @@ size_flags_horizontal = 3
 
 [node name="StartHost" type="Button" parent="MarginContainer/VBoxContainer/BotomRow" unique_id=949692108]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "ForceStart"
 

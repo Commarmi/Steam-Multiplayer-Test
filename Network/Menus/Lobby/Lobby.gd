@@ -5,12 +5,11 @@ class_name Lobby
 # REFERENCIAS DE LA UI
 # ==============================================================================
 # Eliminado el %HostPick de la lista
-@onready var HostOptions: Array[Control] = [%KickAll, %StartHost]
 
 # Referencias de Jugadores
 @onready var player_list = $MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerList
 @onready var player_container_template = $MarginContainer/VBoxContainer/MainRow/PlayersContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/PlayerContainer
-@onready var n_players = %NPlayers
+
 
 # Referencias del Selector de Juegos
 const DireccionCarpetaJuegos: String = "res://Games/"
@@ -31,17 +30,12 @@ func _ready() -> void:
 	# Ocultamos las plantillas
 	player_container_template.visible = false
 	InitialGameContainer.visible = false 
-	
-	# Conectamos señales al Autoload
-	NetworkManager.player_list_updated.connect(actualizar_lista_jugadores)
+
 	NetworkManager.votes_updated.connect(actualizar_lista_juegos) 
 	
 	# Comprobamos permisos de Host
+	
 	var soy_host = multiplayer.is_server()
-	for control in HostOptions:
-		if control != null:
-			control.visible = soy_host
-			
 	# Textos informativos
 	if NetworkManager.current_lobby_id > 0:
 		loby_name.text = Steam.getLobbyData(NetworkManager.current_lobby_id, "name")
@@ -53,7 +47,6 @@ func _ready() -> void:
 		
 	# Cargar carpetas y dibujar las listas por primera vez
 	_cargar_juegos_desde_carpeta()
-	actualizar_lista_jugadores()
 	actualizar_lista_juegos()
 
 func _cargar_juegos_desde_carpeta() -> void:
@@ -109,37 +102,6 @@ func actualizar_lista_juegos() -> void:
 		
 		nuevo_panel.configurar_juego(game_name, votos_de_este_juego, is_winning, is_forced, am_i_voting_this, is_any_forced, game_button_group)
 
-# ==============================================================================
-# LÓGICA DE JUGADORES
-# ==============================================================================
-func actualizar_lista_jugadores() -> void:
-	# Seguridad
-	if multiplayer.multiplayer_peer == null:
-		n_players.text = "0"
-		return
-
-	for child in player_list.get_children():
-		child.queue_free()
-	
-	var id_del_host = Steam.getLobbyOwner(NetworkManager.current_lobby_id)
-	var soy_host = multiplayer.is_server()
-	
-	n_players.text = str(NetworkManager.connected_players.size())
-	
-	# Lógica del botón de Start
-	var todos_listos = NetworkManager.estan_todos_listos()
-	if soy_host and %StartHost != null:
-		%StartHost.disabled = not todos_listos
-	
-	for steam_id in NetworkManager.connected_players:
-		var datos_jugador: OnlinePlayer = NetworkManager.connected_players[steam_id]
-		
-		var nuevo_panel = player_container_template.duplicate()
-		nuevo_panel.visible = true 
-		player_list.add_child(nuevo_panel)
-		
-		nuevo_panel.MenuRoot = self 
-		nuevo_panel.configurar_panel(datos_jugador, soy_host, id_del_host)
 
 # ==============================================================================
 # BOTONES DE LA INTERFAZ
